@@ -27,7 +27,7 @@ app.get('/tasks', async (req, res) => {
 // Create task
 app.post('/tasks', async (req, res) => {
   const body = req.body
-  await tasks.create({description: "Batata", done: true})
+  await tasks.create({description: body.description, done: body.done})
   res.json(body)
 }) 
 
