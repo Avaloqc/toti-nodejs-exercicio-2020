@@ -34,23 +34,26 @@ app.post('/tasks', async (req, res) => {
 // Show task 
 app.get('/tasks/:id', async (req, res) => {
   const taskId = req.params.id
-  await tasks.findByPk(taskId)
-    .then(fetchedData => {
-      res.status(200).json(fetchedData)
-      res.json(fetchedData)
-    })
-    /*.catch(err => res.status(500).json({
-      message: 'Essa tarefa não existe',
-      error: err
-    }))*/
+  const task = await tasks.findByPk(taskId)
+  if (!task) {
+    return res.status(400).json({ error: 'Tarefa não encontrada' });
+  } else {
+    res.json(task)
+  }
+  
+
+  
 })
 
 // Update task
-
 app.put('/tasks/:id', async (req, res) => {
   const taskId = req.params.id
   const body = req.body;
   const task = await tasks.findByPk(taskId)
+  if (!task) {
+    return res.status(400).json({ error: 'Tarefa não encontrada' });
+  }
+
   task.update({description: body.description, done: body.done })
   res.send({ action: 'Updating task', taskId: taskId })
 })
@@ -58,8 +61,11 @@ app.put('/tasks/:id', async (req, res) => {
 // Delete tasks
 app.delete('/tasks/:id', async (req, res) => {
   const taskId = req.params.id
-  await tasks.destroy({ where: { id: taskId } })
-  res.send({ action: 'Deleting task', taskId: taskId })
+  const task = await tasks.destroy({ where: { id: taskId } })
+  if (!task) {
+    return res.status(400).json({ error: 'Tarefa não encontrada' });
+  }
+  else {res.send({ action: 'Deleting task', taskId: taskId })}
 })
 
 app.listen(3000, () => {
