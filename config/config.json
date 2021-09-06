@@ -6,12 +6,12 @@
   },
   "test": {
     "database": "database_test",
-    "storage":"databe_test_task-list.db",
+    "storage":"database_test_task-list.db",
     "dialect": "sqlite"
   },
   "production": {
     "database": "database_production",
-    "storage": "databe_production_task-list.db",
+    "storage": "database_production_task-list.db",
     "dialect": "sqlite"
   }
 }
