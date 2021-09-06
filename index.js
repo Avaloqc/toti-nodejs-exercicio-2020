@@ -44,7 +44,7 @@ app.get('/tasks/:id', async (req, res) => {
 app.put('/tasks/:id', async (req, res) => {
   const taskId = req.params.id
   const task = await tasks.findByPk(taskId)
-  task.update({description: "Ananas", done: true})
+  task.update({description: body.description, done: body.done})
   res.send({ action: 'Updating task', taskId: taskId })
 })
 
