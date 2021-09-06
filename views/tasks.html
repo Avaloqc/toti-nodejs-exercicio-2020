@@ -1,0 +1,73 @@
+
+<html>
+<head>
+    <title>Tarefas</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>th{color:#fff;}</style>
+</head>
+<body>
+    
+<table class="table table-stripped">
+    <tr class="bg-info">
+        <th>id</th>
+        <th>description</th>
+        <th>done</th>
+        <th>data de criacao</th>
+        <th>data de update</th>
+    </tr>
+    <tbody id="myTable"> </tbody>
+</table>
+
+<script>
+    function buildTable (data) {
+        var table = document.getElementById('myTable')
+        for (var i = 0; i< data.length; i++) {
+            var row = ` <tr>
+                        <td>${data[i].id}<td>
+                        <td>${data[i].description}<td>
+                        <td>${data[i].done}<td>
+                        <td>${data[i].createdAt}<td>
+                        <td>${data[i].updatedAt}<td>  
+                        <tr>       
+                    `
+            table.innerHTML += row    
+        }
+    }
+
+let data = [
+{
+"id": 1,
+"description": "Batata",
+"done": false,
+"createdAt": "2021-09-05T21:45:15.976Z",
+"updatedAt": "2021-09-05T21:45:15.976Z"
+},
+{
+"id": 2,
+"description": "Cenoura",
+"done": false,
+"createdAt": "2021-09-05T21:45:15.976Z",
+"updatedAt": "2021-09-05T21:45:15.976Z"
+},
+{
+"id": 3,
+"description": "Maçãs",
+"done": true,
+"createdAt": "2021-09-05T21:45:15.976Z",
+"updatedAt": "2021-09-05T21:45:15.976Z"
+},
+{
+"id": 4,
+"description": "Cenoura",
+"done": null,
+"createdAt": "2021-09-05T23:30:53.907Z",
+"updatedAt": "2021-09-05T23:30:53.907Z"
+}
+]
+
+buildTable(fetchedData)
+</script>
+
+</body>
+</html>
