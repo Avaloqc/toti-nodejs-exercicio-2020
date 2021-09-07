@@ -9,20 +9,17 @@ const tasks = Task(sequelize, DataTypes)
 // We need to parse JSON coming from requests
 app.use(express.json())
 
-/*
-tasks.create({
-  description:'Cenoura',
-  done: false,
-})*/
-
 app.set('view engine', 'ejs')
+app.set('views', 'views')
 
 // List tasks
 app.get('/tasks', async (req, res) => {
   await tasks.findAll().then(fetchedData => {
-    res.json(fetchedData)
+  const json = fetchedData
+  res.render('tasks', json)
   })
 })
+
 
 // Create task
 app.post('/tasks', async (req, res) => {
@@ -41,8 +38,6 @@ app.get('/tasks/:id', async (req, res) => {
     res.json(task)
   }
   
-
-  
 })
 
 // Update task
@@ -53,7 +48,6 @@ app.put('/tasks/:id', async (req, res) => {
   if (!task) {
     return res.status(400).json({ error: 'Tarefa não encontrada' });
   }
-
   task.update({description: body.description, done: body.done })
   res.send({ action: 'Updating task', taskId: taskId })
 })
